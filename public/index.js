@@ -273,4 +273,4 @@ setInterval(function () {
 		.catch(function (error) {
 			console.log(error);
 		});
-}, 5000);
+}, 1000);
