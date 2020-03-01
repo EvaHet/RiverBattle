@@ -225,7 +225,10 @@ document.querySelector('.gameboard').addEventListener('click', shot);
 
 function shot(e) {
 
-	console.log("Y - " + e.target.id.substring(1, 2) + ", X - " + e.target.id.substring(2, 3));
+	let y = e.target.id.substring(1, 2);
+	let x = e.target.id.substring(2, 3);
+
+	console.log(`Y - ${y}, X - ${x}`);
 
 
 	fetch('/shots', {
@@ -234,8 +237,9 @@ function shot(e) {
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				shot: shot
-			})
+					x: x,
+					y: y
+				})
 		})
 		.then(function (response) {
 			if (response.ok) {
@@ -251,17 +255,22 @@ function shot(e) {
 }
 
 
-// setInterval(function () {
-// 	fetch('/shots', {
-// 			method: 'GET'
-// 		})
-// 		.then(function (response) {
-// 			if (response.ok) return response.json();
-// 			throw new Error('Request failed.');
-// 		}).then(function (shot) {
-// 			document.getElementById('history').innerHTML = `${shot}`;
-// 		})
-// 		.catch(function (error) {
-// 			console.log(error);
-// 		});
-// }, 5000);
+setInterval(function () {
+	fetch('/shots', {
+			method: 'GET'
+		})
+		.then(function (response) {
+			if (response.ok) return response.json();
+			throw new Error('Request failed.');
+		}).then(function (shots) {
+			let html = "<ul>";
+			for (let s of shots) {
+				html += `<li> X:${s.shot.x} Y:${s.shot.y}</li>`
+			}
+			html += "</ul>";
+			document.getElementById('history').innerHTML = html;
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+}, 5000);

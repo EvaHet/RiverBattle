@@ -39,7 +39,7 @@ p {
     justify-content: flex-start;
     flex-direction: column;
     align-items: start;
-    height: 666px;
+    /* height: 666px; */
     /* border-radius: 6em/3em; */
     background: radial-gradient(circle at 60% 38%, #000000, #4A4A45);
     padding: 10px;
@@ -55,9 +55,12 @@ p {
     display: flex;
     flex-direction: column;
     border: 1px solid #eceef1;
-    height: 245px;
     width: 755px;
     margin-top: 38px;
+}
+
+.history {
+    color: #267f29;
 }
 
 .partone {

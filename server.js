@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.listen(8080, () => console.log('listening on 8080'));
+app.listen(57000, () => console.log('listening on 57000'));
 
 
 app.post('/game', (req, res) => {
@@ -90,7 +90,7 @@ app.delete('/game', (req, res) => {
 
 
 app.post('/shots', (req, res) => {
-  const shot = {shotTime: new Date(), shot: req.body.shot};
+  const shot = {shotTime: new Date(), shot: req.body};
   console.log(shot);
 
   MongoClient.connect('mongodb://localhost:27017/', function (err, client) {
@@ -130,7 +130,7 @@ app.get('/shots', (req, res) => {
         } 
         client.close();
         if (docs.length > 0) {
-          res.send(docs[0].board);
+          res.send(docs);
         } else {
           res.send({});
         }
